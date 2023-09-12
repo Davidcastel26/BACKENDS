@@ -108,3 +108,19 @@ sort country desc ALPHA
 blpop [KEY NAME]
 
 blpop country
+
+---
+-> check the amount of values into the set
+
+scard [KEY NAME]
+
+scard technology
+
+if you would like to check if there available 
+we can use:
+
+sismember [KEY NAME] [VALUE NAME]
+
+this will return a number value could be 1 or 0
+if its 1 means that exists into the set
+if its 0 means value does not exist in the set
