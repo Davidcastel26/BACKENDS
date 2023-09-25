@@ -25,5 +25,7 @@ model Product {
 model Category {
   idCategory    String @unique @id @default(uuid())
   nameCategory  String @unique
+  isActive      Boolean @default(true)
+  createAt      DateTime @default(now())
   product       Product[]
 }
