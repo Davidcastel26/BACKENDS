@@ -20,4 +20,15 @@ SELECT * FROM person ORDER BY id, email;
 SELECT country_of_birth FROM person ORDER BY country_of_birth;
 
 -- to get just one time a referance from the search 
-SELECT country_of_birth FROM person ORDER BY country_of_birth;
+SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth;
+
+SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth DESC;
+
+-- WHERE
+
+SELECT * FROM person WHERE gender = 'Female';
+
+-- OR 
+SELECT * FROM person WHERE gender = 'Male' AND (country_of_birth = 'Poland' OR country_of_birth = 'China');
+
+SELECT * FROM person WHERE gender = 'Male' AND (country_of_birth = 'Poland' OR country_of_birth = 'China') AND  last_name = 'Denver';
