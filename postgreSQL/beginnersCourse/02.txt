@@ -1,0 +1,15 @@
+// connect to a databases 
+psql --help
+
+psql -h localhost -p 5432 -U davidcastellanos test
+
+// other way to connect to the db 
+
+     \l
+exa: \c [nameDB]
+     \c test
+
+// important comand!!
+will lose every single data in it.
+
+DROP DATABASE nameDB;
