@@ -13,3 +13,7 @@ exa: \c [nameDB]
 will lose every single data in it.
 
 DROP DATABASE nameDB;
+
+
+-- to use this data in the terminal 
+-- \i /Users/davidcastellanos/Documents/JS/BACKENDS/postgreSQL/beginnersCourse/person.sql
