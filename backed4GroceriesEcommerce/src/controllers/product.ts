@@ -138,7 +138,11 @@ export const getAllProducts = async(
 
     try {
         
-        const AllProducts = await prismadb.product.findMany()
+        const AllProducts = await prismadb.product.findMany({
+            where:{
+                isActive:true
+            }
+        })
 
         return res.status(200).json({
             AllProducts

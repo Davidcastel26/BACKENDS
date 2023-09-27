@@ -1,7 +1,7 @@
 
 const corsConfig = {
-    origin:"http://localshot:3000",
-    credentials: true
+    origin:"*",
+    // credentials: false
 }
 
 export default corsConfig;
