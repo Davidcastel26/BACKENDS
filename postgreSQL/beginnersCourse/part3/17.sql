@@ -1,18 +1,14 @@
 -- timestamp dates 
-
 SELECT NOW();
+
 -- DOUBLE COLOMS TO GET ONLY SOMETHING IN SPECIFICT
-
 SELECT NOW()::DATE;
-
 SELECT NOW()::TIME;
 
 -- adding structuting
 SELECT NOW() - INTERVAL '1 YEAR'; -- RETURNS 2022-09-28 15:27:20.06243-06 // TODAY IS 2023-09-28
-
 -- '10 DAYS';
 -- '10 MONTHS';
-
 SELECT NOW()::DATE + INTERVAL '10 MONTHS';
 
 -- TO GET ONLY SOMETHING IN ESPECIFICT BY STRACTING
@@ -21,3 +17,9 @@ SELECT EXTRACT(MONTH FROM NOW());
 SELECT EXTRACT(DAY FROM NOW());
 SELECT EXTRACT(DOW FROM NOW());
 SELECT EXTRACT(CENTURY FROM NOW());
+
+-- 
+SELECT first_name, last_name, gender, country_of_birth FROM person;
+
+-- RETURNING DATE OF AGE
+SELECT first_name, last_name, gender, country_of_birth, date_of_birth, AGE(NOW(), date_of_birth) AS age FROM person ORDER BY date_of_birth DESC;
