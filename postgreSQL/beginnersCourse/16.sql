@@ -1,0 +1,16 @@
+-- coalesce 
+SELECT COALESCE(1);
+-- returns result of 1
+
+SELECT COALESCE(email, 'Email not provided') FROM person;
+
+-- NullIf 
+SELECT 10 / 0;
+
+SELECT NULLIF(10, 10) --  empty
+SELECT NULLIF(10, 1); -- 10
+
+SELECT 10 / NULLIF(2,9); -- RETURNS 5
+
+SELECT COALESCE( 10 / NULLIF(0,0), 5) -- FIVE IS THE NUMBER IN CASE NULLIF NUMBERS ARE NOT RETRIVING ANYTHING
+
