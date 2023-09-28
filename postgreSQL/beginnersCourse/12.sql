@@ -22,5 +22,4 @@ SELECT make, AVG(price) FROM car GROUP BY make;
 
 -- SUM 
 SELECT SUM(price) FROM car;
-
 SELECT make, SUM(price) FROM car GROUP BY make;
