@@ -1,3 +1,3 @@
 
-export type SuccessCallback = () => void;
-export type ErrorCallBack = ( error: string ) => void;
+export type SuccessCallback = (() => void) | undefined;
+export type ErrorCallBack = (( error: string ) => void) | undefined;
