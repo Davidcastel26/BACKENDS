@@ -1,8 +1,5 @@
 import { CronJob } from "cron";
-import { CronTime, OnTick } from "../../ts/types/configs";
-
-
-
+import { CronTime, OnTick } from "../../ts";
 
 export class CronService {
 

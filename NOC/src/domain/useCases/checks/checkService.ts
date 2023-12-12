@@ -1,5 +1,7 @@
-import { CheckServiceUseCase } from "../../../ts/interface/domain/icheckService";
-import { SuccessCallback, ErrorCallBack } from '../../../ts/types/domain/tuseCase';
+import { 
+        SuccessCallback, 
+        ErrorCallBack, 
+        CheckServiceUseCase } from '../../../ts';
 
 
 export class CheckService implements CheckServiceUseCase{
