@@ -11,7 +11,7 @@ export class LogRepositoryImp implements LogRepository {
     constructor( 
         private readonly logDataSource: LogDataSource,
     ) {
-
+        
     }
 
     async saveLog(log: LogEntity): Promise<void> {
