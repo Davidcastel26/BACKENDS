@@ -1,5 +1,6 @@
-import { SendEmailOptions } from './iEmail';
+import { SendEmailOptions, Attachments } from './iEmail';
 
 export {
-    SendEmailOptions
+    SendEmailOptions,
+    Attachments
 }
