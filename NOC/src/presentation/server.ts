@@ -1,13 +1,18 @@
 // import { envs } from "../config/plugins/envs.plugins";
-// import { CheckService } from "../domain/useCases/checks/checkService";
+import { CheckService } from "../domain/useCases/checks/checkService";
+import { CheckServiceMultiple } from "../domain/useCases/checks/checkService-mutiple";
 import { SendEmailLogs } from "../domain/useCases/logs/email/sendLogs";
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
+import { PostgressDataSource } from "../infrastructure/datasources/postgress.datasources";
 import { LogRepositoryImp } from "../infrastructure/repository/log.respository.imp";
-// import { CronService } from "./cron/cronTask";
+import { CronService } from "./cron/cronTask";
 import { EmailService } from "./email/email.service";
 
 const fileSystemLogRepository = new LogRepositoryImp(
     new FileSystemDataSource()
+);
+const PostgressLogRepository = new LogRepositoryImp(
+    new PostgressDataSource()
 );
 
 const emailService = new EmailService();
@@ -39,24 +44,25 @@ export class Server {
         //     '*/5 * * * * *',
         //     () => {
         //         new CheckService(
+        //             fileSystemLogRepository,
         //             () => console.log('success'),
         //             ( error ) => console.log( error )
         //         ).execute( 'https://google.com')
         //     }
         // )
 
-        // CronService.createJob(
-        //     '*/5 * * * * *',
-        //     () => {
-        //         const url = 'http://localhost:3000'
+        CronService.createJob(
+            '*/5 * * * * *',
+            () => {
+                const url = 'http://localhost:3000'
 
-        //         new CheckService(
-        //             fileSystemLogRepository,
-        //             () => console.log(`${ url } is ok`),
-        //             ( error ) => console.log( error )
-        //         ).execute( url )
-        //     }
-        // )
+                new CheckServiceMultiple(
+                    [fileSystemLogRepository, PostgressLogRepository],
+                    () => console.log(`${ url } is ok`),
+                    ( error ) => console.log( error )
+                ).execute( url )
+            }
+        )
 
     }
 }

@@ -6,13 +6,9 @@ import { LogDataSource } from '../../domain/datasources/log.datasource';
 
 export class LogRepositoryImp implements LogRepository {
 
-    // private logDataSource: LogDataSource
-
     constructor( 
         private readonly logDataSource: LogDataSource,
-    ) {
-        
-    }
+    ) {}
 
     async saveLog(log: LogEntity): Promise<void> {
         return this.logDataSource.saveLog( log )
