@@ -8,4 +8,5 @@ export const envs = {
     MAILER_SECRET_KEY: env.get('MAILER_SECRET_KEY').required().asString(),
     MAILER_SERVICE: env.get('MAILER_SERVICE').required().asString(),
     PROD: env.get('PROD').required().asBool(),
+    DATABASE_URL: env.get('DATABASE_URL').required().asString()
 }
