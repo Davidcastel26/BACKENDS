@@ -54,7 +54,8 @@ export class Server {
         CronService.createJob(
             '*/5 * * * * *',
             () => {
-                const url = 'http://localhost:3000'
+                // const url = 'http://localhost:3000'
+                const url = 'http://google.com'
 
                 new CheckServiceMultiple(
                     [fileSystemLogRepository, PostgressLogRepository],
