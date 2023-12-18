@@ -18,15 +18,19 @@ export class LogEntity {
     }
 
     static fromJson = (json: string):LogEntity =>{
-        const { message, level, createdAt } = JSON.parse(json)
+
+        json = ( json === '' ) ? '{}': json;
+
+        const { message, level, createdAt, origin } = JSON.parse(json)
 
         if( !message ) throw new Error(`message is required`);
 
         const log = new LogEntity({
             level,
             message,
-            createdAt,
-            origin: 'log.entity'
+            createdAt: new Date(createdAt),
+            origin
+            // origin: 'log.entity'
         });
         
         return log;
