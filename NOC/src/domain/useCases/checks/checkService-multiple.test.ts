@@ -58,9 +58,9 @@ describe('CheckService UseCase', () => {
         expect( errorCallback ).toHaveBeenCalled();
 
         // expect( mockRepository.saveLog ).toHaveBeenCalledWith()
-        expect( mockRepository.saveLog ).toBeCalledWith(
-            expect.any( LogEntity )
-        )
+        expect( mockRepo1.saveLog ).toBeCalledWith( expect.any( LogEntity ));
+        expect( mockRepo2.saveLog ).toBeCalledWith( expect.any( LogEntity ));
+        expect( mockRepo3.saveLog ).toBeCalledWith( expect.any( LogEntity ));
     });
 
 })
