@@ -12,8 +12,6 @@ describe('Log ENTITY into log.entity.test.ts', () => {
     }
 
     test('should create a log entity instance', () => { 
-
-        
         
         const log = new LogEntity(dataObj);
 
