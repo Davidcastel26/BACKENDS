@@ -18,6 +18,12 @@ describe('CheckService UseCase', () => {
         errorCallback
     );
 
+    beforeEach(() => {
+
+        jest.clearAllMocks()
+
+    })
+
 
     test('should call succesCallback when fetch returns true', async () => {
         
@@ -31,7 +37,20 @@ describe('CheckService UseCase', () => {
         expect( mockRepository.saveLog ).toBeCalledWith(
             expect.any( LogEntity )
         )
+    });
 
-    })
+    test('should call errorCallback when fetch returns False', async () => {
+        
+        const wasOk = await chekcService.execute('https://ww2.google.com')
+
+        expect( wasOk ).toBe( false );
+        expect( successCallback ).not.toHaveBeenCalled();
+        expect( errorCallback ).toHaveBeenCalled();
+
+        // expect( mockRepository.saveLog ).toHaveBeenCalledWith()
+        expect( mockRepository.saveLog ).toBeCalledWith(
+            expect.any( LogEntity )
+        )
+    });
 
 })
