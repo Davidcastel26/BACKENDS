@@ -3,7 +3,7 @@ export interface SendEmailOptions {
     to          : string | string[];
     subject     : string;
     htmlBody    : string;
-    attachments : Attachments[]
+    attachments? : Attachments[]
 }
 
 export interface Attachments {
