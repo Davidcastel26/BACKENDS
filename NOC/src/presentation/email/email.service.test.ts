@@ -1,8 +1,15 @@
+import nodemailer from 'nodemailer';
 import { SendEmailOptions } from "../../ts"
 import { EmailService } from "./email.service"
 
 
 describe('Email Service into Presentation', () => {
+
+    const mockSendMail = jest.fn()
+
+    nodemailer.createTransport = jest.fn().mockReturnValue({
+        sendEmail: mockSendMail
+    })
 
     test('should send email', async() => {
 
@@ -14,9 +21,15 @@ describe('Email Service into Presentation', () => {
             htmlBody:'<h1>Test</h1>'
         }
 
-        const emailSent = await emailService.sendEmail( options );
+        await emailService.sendEmail( options );
 
-        expect( emailSent ).toBeTruthy()
+        // expect( emailSent ).toBeTruthy()
+        expect( mockSendMail ).toHaveBeenCalledWith({
+            attachments: expect.any(Array),
+            to: 'david.castellanos@popoyan.com.gt',
+            subject: 'Test',
+            htmlBody:'<h1>Test</h1>'
+        })
 
     })
 
