@@ -10,7 +10,7 @@ describe('CronService', () => {
 
         setTimeout(( ) => {
 
-            expect(mockTick).toHaveBeenCalledWith(2)
+            expect(mockTick).toHaveBeenCalledTimes(2)
             job.stop();
             done()
 
