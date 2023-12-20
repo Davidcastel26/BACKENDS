@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import compresion from 'compression'
 import path from 'path';
 // import { json } from 'stream/consumers';
 
@@ -31,7 +32,7 @@ export class Server {
     //* Middlewares
     this.app.use( express.json() ) // raw
     this.app.use( express.urlencoded({ extended: true }) ) //x-www-form-urlencoded
-
+    this.app.use( compresion() )
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
