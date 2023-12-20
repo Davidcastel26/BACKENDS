@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from "express"
+import { prisma } from "../../data/postgres"
+import { CreateTodoDto } from '../../domain/dtos/todos/create-todo.dto';
 
-const todos = [
-    {id: 1, text: 'Buy milk', createdAt: new Date()},
-    {id: 2, text: 'Buy bread', createdAt: null},
-    {id: 3, text: 'Buy butter', createdAt: new Date()},
-  ]
+interface Todo {
+    id?: string
+    text: string
+    completedAt?: Date
+}
 
+type todoExcep = Pick<Todo, 'text'>;
 
 export class TodosControllers {
     
@@ -13,77 +16,111 @@ export class TodosControllers {
     //DI
     constructor(){}
 
-    public getTodos = (req: Request, res: Response) => {
+    public getTodos = async(req: Request, res: Response) => {
 
-        return res.json( todos )
+       try {
+        
+        const allTodos = await prisma.todo.findMany()
+
+        return res.status(200).json(allTodos)
+
+       } catch (error) {
+        console.log(error)
+       }
   
     }
 
-    public getTodoById = ( req: Request, res: Response) => {
+    public getTodoById = async( req: Request, res: Response) => {
 
         // parseInt(id)
         // console.log(typeof( id ), id)
-        const  id = +req.params.id;
-        const todo = todos.find( (todo) => todo.id === id);
+        const  {id} = req.params;
+        // const todo = todos.find( (todo) => todo.id === id);
 
-        ( todo )
-        ? res.status(200).json(todo)
+        const getOneTodo = await prisma.todo.findFirst({
+            where:{
+                id
+            }
+        });
+
+        ( getOneTodo )
+        ? res.status(200).json(getOneTodo)
         : res.status(400).json({error: 'message error bitch'})
 
     }
 
-    public createTodo = (
+    public createTodo = async(
         req:Request,
         res: Response,
         next: NextFunction
     ) => {
+        const [error, createTodoDto] = CreateTodoDto.create(req.body)
+
+        if( error ) return res.status(400).json({error})
+
+        // const { text }:todoExcep = req.body;
+
+        // if( !text ) throw new Error(` ${text} is a must`)
+
+        // const newText: Todo = {
+        //     text,
+        //     completedAt: new Date()
+        // }; 
         
-        const { text } = req.body;
-
-        if( !text ) throw new Error(` ${text} is a must`)
-
-        todos.push({
-            id: todos.length + 1,
-            text,
-            createdAt: new Date()
+        const newText = await prisma.todo.create({
+            data: createTodoDto!,
         })
 
-        res.json( text )
+        res.json( newText )
 
     } 
 
-    public updateTodo = (
+    public updateTodo = async(
         req:Request,
         res: Response,
         next: NextFunction
     ) => {
         
-        const id = +req.params.id;
-        const { text } = req.body;
+        const {id} = req.params;
+        const { text, completedAt} = req.body;
         
-        const todo = todos.find( todo => todo.id === id);
+        // const todo = todos.find( todo => todo.id === id);
+        const todo = await prisma.todo.findFirst({
+            where:{ id }
+        });
         if(!todo) throw new Error(` ${text} is a must`)
+        // todo.text = text || todo?.text;
 
-        
-        todo.text = text || todo?.text;
-
-
-        return res.status(201).json(todo)
+        const updatetodo = await prisma.todo.update({
+            where:{ id },
+            data:{
+                text: text,
+                completedAt: completedAt
+            }
+        });
+        return res.status(201).json(updatetodo)
 
     }
 
-    public deleteTodo = (
+    public deleteTodo = async(
         req:Request,
         res: Response,
         next: NextFunction
     ) => {
 
-        const id = +req.params.id;
+        const {id} = req.params;
 
-        const todo = todos.find(todo => todo.id === id);
+        // const todo = todos.find(todo => todo.id === id);
+        const todo = await prisma.todo.findFirst({
+            where:{ id }
+        });
+
         if( !todo ) throw new Error(`the fuck with that id?`)
         
-        todos.splice( todos.indexOf(todo), 1)
+        // todos.splice( todos.indexOf(todo), 1)
+        const deleted = await prisma.todo.delete({
+            where:{ id }
+        })
 
         return res.status(204)
     } 
