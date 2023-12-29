@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import compresion from 'compression'
 import path from 'path';
+import morgan from 'morgan';
 // import { json } from 'stream/consumers';
 
 interface Options {
@@ -12,7 +13,8 @@ interface Options {
 
 export class Server {
 
-  private app = express();
+  public  readonly app = express();
+  private serverListener?: any;
   private readonly port: number;
   private readonly publicPath: string;
   private readonly routes: Router;
@@ -33,6 +35,7 @@ export class Server {
     this.app.use( express.json() ) // raw
     this.app.use( express.urlencoded({ extended: true }) ) //x-www-form-urlencoded
     this.app.use( compresion() )
+    this.app.use( morgan('dev'));
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
@@ -48,10 +51,13 @@ export class Server {
     });
     
 
-    this.app.listen(this.port, () => {
+    this.serverListener = this.app.listen(this.port, () => {
       console.log(`Server running on port ${ this.port }`);
     });
+  }
 
+  public close() {
+     this.serverListener?.close();
   }
 
 }

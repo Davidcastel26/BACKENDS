@@ -1,3 +1,4 @@
+import { CustomError } from "../../domain/errors/custom.error";
 import { prisma } from "../../data/postgres";
 import { TodoDatasource } from "../../domain/datasources/todo.datasource";
 import { CreateTodoDto } from "../../domain/dtos";
@@ -31,7 +32,7 @@ export class TodoDatasourceImpl implements TodoDatasource {
             }
         });
 
-        if( !getOneTodo ) throw  'message error bitch who u trying to look for?'
+        if( !getOneTodo ) throw  new CustomError(404,'message error bitch who u trying to look for?')
 
         return TodoEntity.fromObject(getOneTodo)
     }

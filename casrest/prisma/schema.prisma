@@ -13,3 +13,13 @@ model todo {
   text        String  @db.VarChar
   completedAt DateTime? @db.Timestamp()
 }
+
+model user {
+  id          String @unique @id @default(uuid())
+  name        String @db.VarChar(15)
+  email       String @unique @db.VarChar(70)
+  emailValidated Boolean @default(false)
+  password    String @db.VarChar(100)
+  img         String? 
+  role        String[] @db.VarChar(40)
+}

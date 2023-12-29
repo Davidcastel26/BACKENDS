@@ -23,7 +23,7 @@ export class UpdateTodoDto {
       const { id, text, completedAt } = props;
       let newCompletedAt =completedAt;
   
-      if ( !id || isNaN( Number(id)) ) {
+      if ( !id ) {
         return ['id must be a valid number'];
       }
   
