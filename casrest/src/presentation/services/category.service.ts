@@ -55,7 +55,11 @@ export class CategoryService {
             // })
 
             const [total, categories] = await Promise.all([
-                prisma.category.count(),
+                prisma.category.count({
+                    select:{
+                        _all: true
+                    }
+                }),
                 prisma.category.findMany({
                     take: limit ? Number(limit): undefined,
                     skip: page ? Number(page): undefined
