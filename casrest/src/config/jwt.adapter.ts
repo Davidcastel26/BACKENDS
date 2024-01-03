@@ -17,7 +17,7 @@ export class JWTGenerator {
 
     }
 
-    static validateToken( token: string ){
+    static validateToken<T>( token: string ):Promise<T | null >{
 
 
         return new Promise((resolve) => {
@@ -26,7 +26,7 @@ export class JWTGenerator {
             
                 if( err ) return resolve(null);
 
-                resolve(decoded)
+                resolve(decoded as T)
                 
             })
 

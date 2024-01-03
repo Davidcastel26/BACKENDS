@@ -8,13 +8,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model todo {
+model Todo {
   id          String  @id @default(uuid())
   text        String  @db.VarChar
   completedAt DateTime? @db.Timestamp()
 }
 
-model user {
+model User {
   id          String @unique @id @default(uuid())
   name        String @db.VarChar(15)
   email       String @unique @db.VarChar(70)
@@ -22,4 +22,26 @@ model user {
   password    String @db.VarChar(100)
   img         String? 
   role        String[] @db.VarChar(40)
+  category    Category[]
+  product     Product[]
+}
+
+model Category {
+  id          String @unique @id @default(uuid())
+  name        String
+  available   Boolean @default(true)
+  userId      String
+  user        User @relation(fields: [userId],  references: [id] )
+  product     Product[]
+}
+
+model Product {
+  id          String @unique @id @default(uuid())
+  cateogryId  String
+  userId      String
+  name        String @unique
+  price       Int
+  description String
+  category    Category @relation(fields: [cateogryId], references: [id])
+  user        User @relation(fields: [userId], references: [id]) 
 }
