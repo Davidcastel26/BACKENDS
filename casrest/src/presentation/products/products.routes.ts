@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { AuthMiddleware } from '../../presentation/middleware/auth.middleware';
 import { ProductController } from './products.controllers';
+import { ProductService } from '../../presentation/services/product.service';
 
 
 
@@ -10,7 +11,8 @@ export class ProductRoutes {
 
         const router = Router()
 
-        const controller = new ProductController()
+        const productService = new ProductService()
+        const controller = new ProductController( productService )
 
         router.get('/', controller.getProduct )
         router.post('/', [
