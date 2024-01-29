@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
+import path from 'path'
+import fileUpload from 'express-fileupload'
 import compresion from 'compression'
-import path from 'path';
 import morgan from 'morgan';
 // import { json } from 'stream/consumers';
 
@@ -36,6 +37,10 @@ export class Server {
     this.app.use( express.urlencoded({ extended: true }) ) //x-www-form-urlencoded
     this.app.use( compresion() )
     this.app.use( morgan('dev'));
+    this.app.use( fileUpload({
+      limits: { fileSize: 50 * 1024 * 1024}
+    }))
+
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
