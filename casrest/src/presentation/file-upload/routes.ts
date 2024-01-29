@@ -4,6 +4,7 @@ import { AuthMiddleware } from "../middleware/auth.middleware";
 import { CategoryService } from "../services/category.service";
 import { FileUploadService } from "../../presentation/services/file-upload.service";
 import { FileUploadMiddleware } from "../../presentation/middleware/file-upload.middleware";
+import { TypeMiddleware } from "../../presentation/middleware/type.middleware";
 
 export class FileUploadRoute {
 
@@ -15,7 +16,12 @@ export class FileUploadRoute {
         const controller = new uploadFileController( service )
 
 
-        router.use( FileUploadMiddleware.containFiles )
+        // router.use( FileUploadMiddleware.containFiles )
+        // router.use( TypeMiddleware.validTypes(['user','products','categories']) )
+        router.use([
+            FileUploadMiddleware.containFiles, 
+            TypeMiddleware.validTypes(['user','products','categories'])
+        ])
 
         // Definir las rutas
         // api/upload/single/<user| category| product>

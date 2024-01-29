@@ -29,12 +29,6 @@ export class uploadFileController {
         // console.log( req.files )
 
         const type = req.params.type
-        const validType = ['user','products','categories']
-
-        if( !validType.includes(type) ){
-            return res.status(400).json({ error: `Invalid type: ${type}, valid ones ${validType}`})
-        }
-
 
         const file = req.body.files.at(0) as UploadedFile
 
@@ -52,13 +46,7 @@ export class uploadFileController {
     ) => {
 
         
-        const type = req.params.type
-        const validType = ['user','products','categories']
-
-        if( !validType.includes(type) ){
-            return res.status(400).json({ error: `Invalid type: ${type}, valid ones ${validType}`})
-        }
-
+        const type = req.params.type;
 
         const files = req.body.files as UploadedFile[];
 
