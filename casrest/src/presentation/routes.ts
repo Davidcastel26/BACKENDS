@@ -4,6 +4,7 @@ import { AuthRoutes } from "./auth/routes";
 import { CategoryRoute } from "./category/routes";
 import { ProductRoutes } from "./products/products.routes";
 import { FileUploadRoute } from "./file-upload/routes";
+import { ImageRoutes } from "./images/images.routes";
 
 
 export class AppRoutes { 
@@ -22,6 +23,7 @@ export class AppRoutes {
         router.use('/api/products', ProductRoutes.routes  )
 
         router.use('/api/upload', FileUploadRoute.routes )
+        router.use('api/images', ImageRoutes.routes )
 
         return router;
     }
