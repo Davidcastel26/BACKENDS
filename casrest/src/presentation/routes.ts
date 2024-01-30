@@ -5,6 +5,7 @@ import { CategoryRoute } from "./category/routes";
 import { ProductRoutes } from "./products/products.routes";
 import { FileUploadRoute } from "./file-upload/routes";
 import { ImageRoutes } from "./images/images.routes";
+import { GitHubRoute } from "./github/github.routes";
 
 
 export class AppRoutes { 
@@ -24,6 +25,8 @@ export class AppRoutes {
 
         router.use('/api/upload', FileUploadRoute.routes )
         router.use('api/images', ImageRoutes.routes )
+
+        router.use('/api/github', GitHubRoute.routes)
 
         return router;
     }

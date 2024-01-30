@@ -15,6 +15,10 @@ export const envs = {
   
   WEBSERVICE_URL: get('WEBSERVICE_URL').required().asString(),
   SEND_EMAILL: get('SEND_EMAIL').default('false').asBool(),
+
+  SECRET_TOKEN: get('SECRET_TOKEN').required().asString(),
+  DISCORD_WEBHOOK_URL: get('DISCORD_WEBHOOK_URL').required().asString(),
+
 }
 
 
