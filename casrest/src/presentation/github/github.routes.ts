@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { GitHubController } from "./github.controller";
+import { GithubSha256Middleware } from "../../presentation/middleware/github-shad256.middleware";
 
 
 
@@ -11,6 +12,8 @@ export class GitHubRoute {
 
         // const service = new 
         const controller = new GitHubController()
+
+        router.use( GithubSha256Middleware.verifySignature )
 
         router.post('/', controller.webhookHandler)
 
