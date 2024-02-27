@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container_name: postgres_database
+    container_name: postgres_database2
     image: postgres:15.1
     volumes:
       - postgres-db:/var/lib/postgresql/data 
@@ -14,7 +14,10 @@ services:
       - db
     image: dpage/pgadmin4:6.17
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       - PGADMIN_DEFAULT_PASSWORD=123456
       - PGADMIN_DEFAULT_EMAIL=superman@google.com
+
+volumes:
+  postgres-db:
