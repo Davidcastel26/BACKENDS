@@ -1,5 +1,14 @@
 # /app /usr /lib
-FROM --platform=linux/arm64 node:20.11.1-alpine3.19
+# FROM --platform=linux/arm64 node:20.11.1-alpine3.19
+
+# create buildx ---------------------
+# docker buildx create --name mybuilder --drive docker-container --bootstrap --use
+
+# FROM --platform=$BUILDPLATFORM node:20.11.1-alpine3.19
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t davidcastel26/cron-ticker:latest --push .
+
+FROM node:20.11.1-alpine3.19
+# docker buildx build --platform linux/amd64,linux/arm64 -t davidcastel26/cron-ticker:oso --push .
 
 # cd app 
 WORKDIR /app
