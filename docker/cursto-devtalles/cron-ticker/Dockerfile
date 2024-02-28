@@ -1,5 +1,5 @@
 # /app /usr /lib
-FROM node:20.11.1-alpine3.19
+FROM --platform=linux/arm64 node:20.11.1-alpine3.19
 
 # cd app 
 WORKDIR /app
@@ -10,7 +10,8 @@ COPY package.json ./
 # install dependencies 
 RUN npm install
 
-COPY app.js ./
+# COPY app.js ./
+COPY . .
 
 # Realizar testing
 RUN npm run test
