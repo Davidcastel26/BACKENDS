@@ -7,3 +7,8 @@ package-lock.json
 .git
 .gitignore
 .dockerignore
+
+README.md
+# TO CREATE WITH DIFERENTS CPUs
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t davidcastel26/cron-ticker:perri --push .
+
