@@ -24,11 +24,11 @@ export class SeedService {
 
     await this.insertNewProducts( adminUser );
 
-    return 'SEED EXECUTED';
+    return 'SEED EXECUTED!!!';
   }
 
   private async deleteTables() {
-
+ 
     await this.productsService.deleteAllProducts();
 
     const queryBuilder = this.userRepository.createQueryBuilder();
