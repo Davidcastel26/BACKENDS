@@ -12,6 +12,8 @@ services:
     volumes: 
       # crearemos un bind voulme de mi carpeta app
       - .:/app/
+      # en caso que no exista el dir
+      - /app/node_modules
     container_name: nest-app    
     ports:
       - ${PORT}:${PORT}
