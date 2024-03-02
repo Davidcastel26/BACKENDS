@@ -1,7 +1,10 @@
-
+#  IMAGEN INICIAL Y LO LLAMAMOS DEV-DEPS 
 FROM node:19-alpine3.15 as dev-deps
+# IR/CREAR WORKDIR DE APP 
 WORKDIR /app
+# CIPIAMOS EL PACKAGE.JSON 
 COPY package.json package.json
+# SE HACE EL YARN INSTALL Y BLOQUEAMOS LAS VERSIONES QUE TENMOS EN EL PACKAGE.JSON
 RUN yarn install --frozen-lockfile
 
 
@@ -15,7 +18,7 @@ RUN yarn build
 FROM node:19-alpine3.15 as prod-deps
 WORKDIR /app
 COPY package.json package.json
-RUN yarn install --frozen-lockfile
+RUN yarn install --prod --frozen-lockfile
 
 
 FROM node:19-alpine3.15 as prod
