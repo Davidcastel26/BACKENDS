@@ -8,9 +8,11 @@ COPY package.json package.json
 RUN yarn install --frozen-lockfile
 
 
+# CREAMOS EL NUEVO STATE QUE ES EL BUILDER 
 FROM node:19-alpine3.15 as builder
 WORKDIR /app
 COPY --from=dev-deps /app/node_modules ./node_modules
+# SE COPIA TODO LO QUE NO ESTA IGNORADO EN EL .DOCKERIGNORE 
 COPY . .
 # RUN yarn test
 RUN yarn build
@@ -18,10 +20,12 @@ RUN yarn build
 FROM node:19-alpine3.15 as prod-deps
 WORKDIR /app
 COPY package.json package.json
+# INTALAR DEPS PERO SOLO LAS DE PRODUCTIONS 
 RUN yarn install --prod --frozen-lockfile
 
 
 FROM node:19-alpine3.15 as prod
+# EXPONEMOS EL PUERTO DE LA APLICACION 
 EXPOSE 3000
 WORKDIR /app
 ENV APP_VERSION=${APP_VERSION}
