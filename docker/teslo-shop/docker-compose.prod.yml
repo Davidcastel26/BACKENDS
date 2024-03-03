@@ -8,13 +8,10 @@ services:
     # service "app" has neither an image nor a build context specified: invalid compose projec
     build:
       context: .
-      target: ${STAGE} #viene de dockerfile
+      target: ${STAGE} #prod #viene de dockerfile
       dockerfile: Dockerfile
-    volumes: 
-      # crearemos un bind voulme de mi carpeta app
-      - .:/app/
-      # en caso que no exista el dir
-      - /app/node_modules
+      # aqui creamos el nombre del tag sobre la imagen  
+    image: davidcastel26/teslo-shop-backend:1.2.0
     container_name: nest-app    
     ports:
       - ${PORT}:${PORT}

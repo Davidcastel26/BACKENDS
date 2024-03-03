@@ -25,4 +25,13 @@ http://localhost:3000/api/seed
 
 # Production notes:
 
+```
+docker compose -f docker-compose.prod.yml build
+```
+
+if you need create only the app container
+```
+docker compose -f docker-compose.prod.yml build app
+```
+
 
