@@ -20,19 +20,20 @@ RUN yarn install --frozen-lockfile
 
 
 # CREAMOS EL NUEVO STATE QUE ES EL BUILDER 
+# SE COPIA TODO LO QUE NO ESTA IGNORADO EN EL .DOCKERIGNORE en COPY 2
+# RUN yarn test
 FROM node:19-alpine3.15 as builder
 WORKDIR /app
 COPY --from=dev-deps /app/node_modules ./node_modules
-# SE COPIA TODO LO QUE NO ESTA IGNORADO EN EL .DOCKERIGNORE 
 COPY . .
-# RUN yarn test
 RUN yarn build
 
+# INTALAR DEPS PERO SOLO LAS DE PRODUCTIONS en RUN
 FROM node:19-alpine3.15 as prod-deps
 WORKDIR /app
 COPY package.json package.json
-# INTALAR DEPS PERO SOLO LAS DE PRODUCTIONS 
 RUN yarn install --prod --frozen-lockfile
+
 
 
 FROM node:19-alpine3.15 as prod
@@ -45,11 +46,6 @@ COPY --from=builder /app/dist ./dist
 
 CMD [ "node","dist/main.js"]
 
-
-
-
-
-
-
-
-
+# MULTY PLATFROM IMAGE this must be at the end
+# docker buildx create --name mytesloshop --bootstrap --use
+# docker buildx build --platform linux/amd64,linux/arm64 -t davidcastel26/teslo-shop:1.0.0 --push .

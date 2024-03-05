@@ -11,7 +11,7 @@ services:
       target: ${STAGE} #prod #viene de dockerfile
       dockerfile: Dockerfile
       # aqui creamos el nombre del tag sobre la imagen  
-    image: davidcastel26/teslo-shop-backend:1.2.0
+    image: davidcastel26/teslo-shop:1.2.0
     container_name: nest-app    
     ports:
       - ${PORT}:${PORT}
