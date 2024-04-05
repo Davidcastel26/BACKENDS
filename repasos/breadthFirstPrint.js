@@ -1,26 +1,34 @@
 
-const breadthFirstPrint = (graph, source) => {
+const breadthFirstPrint = (
+  graph,
+  source, // current location
+) => {
+   // breadth needs to be into a queue
+  const queue = [ source ]
   
-    const queue = [ source ]
+  while( queue.length > 0 ){
+    // we need to return the first element
+    // we need to save into a variable the value
+    const current = queue.shift()
+    // take a look
+    console.log( current )
     
-    while ( queue.length > 0){
-      let current = queue.shift()
-      console.log(current)
-      
-      for( let neighbor of graph[current]){
-        queue.push(neighbor)
-      }
+    // graph[current] will keep the info from the array like a:['b','c']
+    for( let neighbor of graph[current]){
+      // we need to added into the back for the queue
+      queue.push(neighbor)
     }
-    
   }
   
-  const graphy = {
-      a:['c','b'],
-      b:['d'],
-      c:['e'],
-      d:['f'],
-      e:[],
-      f:[],
-  }
-  
-  breadthFirstPrint( graphy, 'a')
+}
+
+const graph = {
+  a:['b','c'],
+  b:['d'],
+  c:['e'],
+  d:['f'],
+  e:[],
+  f:[]
+}
+
+breadthFirstPrint( graph, 'a')
