@@ -36,10 +36,15 @@ export const findUser = async (
 export const signToken = async (user: DocumentType<User>) => {
   // Sign the access token
   const access_token = signJwt(
-    { sub: user._id },
-    {
-      expiresIn: `${config.get<number>('accessTokenExpiresIn')}m`,
-    }
+    { sub: user._id }, 
+    'accessTokenPrivateKey', 
+    { expiresIn: `${config.get<number>('accessTokenExpiresIn')}m`,}
+  );
+
+  const refresh_token = signJwt(
+    { sub: user._id }, 
+    'refreshTokenPrivateKey', 
+    { expiresIn: `${config.get<number>('refreshTokenExpiresIn')}m`,}
   );
 
   // Create a Session
@@ -48,6 +53,6 @@ export const signToken = async (user: DocumentType<User>) => {
   });
 
   // Return access token
-  return { access_token };
+  return { access_token, refresh_token };
 };
 
