@@ -1,20 +1,14 @@
 import express from 'express';
-import {
-  getAllUsersHandler,
-  getMeHandler,
-} from '../controllers/user.controller';
-import { deserializeUser } from '../middleware/deserializeUser';
-import { requireUser } from '../middleware/requireUser';
-import { restrictTo } from '../middleware/restrictTo';
+import { loginHandler, registerHandler } from '../controllers/auth.controller';
+import { validate } from '../middleware/validate';
+import { createUserSchema, loginUserSchema } from '../schemas/user.schema';
 
 const router = express.Router();
-router.use(deserializeUser, requireUser);
 
-// Admin Get Users route
-router.get('/', restrictTo('admin'), getAllUsersHandler);
+// Register user route
+router.post('/register', validate(createUserSchema), registerHandler);
 
-// Get my info route
-router.get('/me', getMeHandler);
+// Login user route
+router.post('/login', validate(loginUserSchema), loginHandler);
 
 export default router;
-
