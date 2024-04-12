@@ -2,7 +2,7 @@ version: '3.8'
 services:
   mongo:
     image: mongo:latest
-    container_name: mongose
+    container_name: mongose12
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
@@ -15,9 +15,9 @@ services:
       - '6000:27017'
   redis:
     image: redis:latest
-    container_name: redisx
+    container_name: redis12
     ports:
-      - '6379:6379'
+      - '6380:6379'
     volumes:
       - redis:/data
 volumes:

@@ -127,17 +127,21 @@ export const refreshAccessTokenHandler = async (
       refresh_token,
       'refreshTokenPublicKey'
     );
+    console.log(  decoded, ' this is decoded ------ ')
+    
+   
     const message = 'Could not refresh access token';
     if (!decoded) {
       return next(new AppError(message, 403));
     }
-
+    console.log(  decoded?.sub, ' this is decoded SUB -----')
     // Check if the user has a valid session
     const session = await redisClient.get(decoded.sub);
     if (!session) {
       return next(new AppError(message, 403));
     }
-
+    console.log( typeof session, ' this is type of SESSION ------')
+    console.log( session, ' this is type of SESSION ------')
     // Check if the user exist
     const user = await findUserById(JSON.parse(session)._id);
 
