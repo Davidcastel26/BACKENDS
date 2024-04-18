@@ -49,3 +49,4 @@ CMD [ "node","dist/main.js"]
 # MULTY PLATFROM IMAGE this must be at the end
 # docker buildx create --name mytesloshop --bootstrap --use
 # docker buildx build --platform linux/amd64,linux/arm64 -t davidcastel26/teslo-shop:1.0.0 --push .
+# docker build --tag lacarreta_backend:running
