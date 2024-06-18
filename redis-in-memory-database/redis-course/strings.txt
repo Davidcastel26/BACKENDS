@@ -13,3 +13,23 @@ INCRBY user:23:credit-balance
 INCRBY user:23:credit-balance -50
 (integer) 20
 
+Manipulating String:
+DECRBY key decrement
+    - DECR key
+INCREBY key increment
+    - INCR key
+INCREBYFLOAT key increment
+     
+example ----
+set inventory:4x100m-womens-final 1000
+return ok
+get inventory:4x100m-womens-final
+(integer) 999
+decrby inventory:4x100m-womens-final 1
+(integer) 999
+set inventory:4x100-womens-final "Sold Out"
+return ok
+object encoding inventory:4x100m-womens-final
+"embstr"
+decrby inventory:4x100m-womens-final 10
+(error) ERR value is not an integer or out of range
