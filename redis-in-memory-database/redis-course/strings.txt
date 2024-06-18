@@ -1,0 +1,15 @@
+save the time zone
+SET user:101:time-zone UTC-8
+
+ex will be the experiation in secs
+SET usage:63 '{"balance": 699.99, "currency": "USD", "lastLogin": 1582293330, "maxUser": 10, "recentCharges":[699.99,699.99,529.99]} EX 7200
+
+ttl number of seconds before expires
+
+incr & incrby
+we can increment a value by one or by the amount we want
+INCRBY user:23:credit-balance
+
+INCRBY user:23:credit-balance -50
+(integer) 20
+
